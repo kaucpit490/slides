@@ -1,94 +1,173 @@
-## Usability & User Experience (UX)
+### The UNIX/Linux Filesystem
+
+> The purpose of a filesystem is to organize the system's storage resources.
 
 
-## Usability Goals
+### Filesystem main components
 
-- Effectiveness <!-- .element: class="fragment" data-fragment-index="0" -->
-  - Does it help users achieve their tasks? How good? <!-- .element: class="fragment" data-fragment-index="1" -->
-- Efficiency <!-- .element: class="fragment" data-fragment-index="2" -->
-  - How many steps are required to achieve a task? <!-- .element: class="fragment" data-fragment-index="3" -->
-- Safety <!-- .element: class="fragment" data-fragment-index="4" -->
-  - Does it help users avoid serious errors and recover from them? <!-- .element: class="fragment" data-fragment-index="5" -->
+ 1. A namespace: How to name things and organize them in a hierarchy
+ 2. An API: a set of system calls for manipulating things
+ 3. Security models: schemes for protecting, hiding, and sharing things
+ 4. An implementation: software that talks to the underlying hardware
 
 
-## Usability Goals (cont.)
-- Utility <!-- .element: class="fragment" data-fragment-index="0" -->
- - Does it provide a set of useful functions? <!-- .element: class="fragment" data-fragment-index="1" -->
-- Learnability <!-- .element: class="fragment" data-fragment-index="2" -->
- - Is it easy to learn? Does it require reading the help/docs? <!-- .element: class="fragment" data-fragment-index="3" -->
-- Memorability <!-- .element: class="fragment" data-fragment-index="4" -->
-  - Is it easy to remember? <!-- .element: class="fragment" data-fragment-index="5" -->
+ ### The Linux kernel supports many different types of filesystems:
+ 
+  - _ext4_, the predominant type
+  - _XFS_
+  - _UFS_
+  - Non-Linux filesystems: _FAT_ and _NTFS_
 
 
-## User Experience (UX) Goals
-- Satisfying <!-- .element: class="fragment" data-fragment-index="0" -->
-- Enjoyable <!-- .element: class="fragment" data-fragment-index="1" -->
-- Fun & Entertaining <!-- .element: class="fragment" data-fragment-index="2" -->
-- Helpful <!-- .element: class="fragment" data-fragment-index="3" -->
-- Aesthetically pleasing  <!-- .element: class="fragment" data-fragment-index="4" -->
+### Pathname
+- A pathname refers to the route to a unique location in the tree structure of the filesystem. The pathname can be described as:
+  - Absolute pathname: starts with a slash on the left, e.g. /etc/passwd
+  - Relative pathname: does not start with a slash. It's relative to the present working directory (pwd) e.g. etc/passwd
+
+```bash
+$ /home/khalid/scripts/bash/script.sh ## absolute pathname
+$ cd /home/khalid/                    ## absolute pathname
+$ scripts/bash/script.sh              ## relative pathname
+```
 
 
-## Nielsen's 10 Heuristics and Usability Principles 
-[10 Usability Heuristics for User Interface Design](https://www.nngroup.com/articles/ten-usability-heuristics/)
+### Mounting and Unmounting
+- External storage media devices can be mounted in any directory created by the user.
+  - Typically in `/mnt/`
+- The `mount` command is used to mount a device and `umount` to unmount it.
+
+```bash
+$ mount /dev/cdrom /mnt/cdrom
+$ umount /mnt/cdrom
+```
 
 
-## 1- Visibility of System Status
-![An example of visibility of system status: Slack app](./images/system_status_slack.png "Slack app")
-![An example of visibility of system status: BestBuy](./images/system_status_bestbuy.png "BestBuy website")
+### Organization of the file tree
+| Pathname        | Contents           |
+| --------------- |--------------------|
+|   /bin   and /sbin       |    Core Operating system commands.                |
+|    /boot             |    Boot loader and files needed by the kernel.                |
+|    /dev             |   Device entries for disks, printers, etc.                |
+|     /home            |  Default home directories for users.                  |
+| /root | The home directory for the root user (sometimes just /).  |
 
 
-## 2- Match between system and the real world
-  - Speak the language of your users
-![An example of Match between system and the real world: Lyft](./images/system_real_world_lyft.png "Lyft website")
+
+| Pathname        | Contents           |
+| --------------- |--------------------|
+|      /lib           |    Libraries, shared libraries, and commands used by /bin and /sbin
+|   /mnt             | Temporarily mount points for removable media. |
+|   /tmp              |     Temporarily files that disappear after reboot.               |
+| /user | Hierarchy of secondary files and commands (/usr/bin, /usr/lib, etc.). |
+| /var | System-specific data and configuration files. |
 
 
-  
-## 3- User control and freedom
-![An example of User control and freedom: Android Studio app](./images/user_control_freedom_android_studio.png "Android Studio")
-![An example of User control and freedom:: Google Photos](./images/user_control_freedom_undo.png "Google Photos")
+
+### File types (I)
+- Linux uses a symbol to indicate the file-type.
+- The symbol is the first 
+
+```bash
+$ ls -l
+total 4
+-rw-r--r--  1 khalid  staff    0 Sep 22 17:49 README.md
+drwxr-xr-x  6 khalid  staff  204 Sep 22 16:59 content
+drwxr-xr-x  4 khalid  staff  136 Aug 28 22:36 static
+drwxr-xr-x  3 khalid  staff  102 Aug 28 22:36 themes
+```
 
 
-## 4- Consistency and standards
-  - Follow platform conventions
-![An example of the back button in ios: ](./images/back_ios.jpg "")  
-![An example of the back button in Android: ](./images/back_android.png "")
+### File types (II)
+| File Type | Symbol |
+|-----------|--------------------|
+| Regular file | - |
+| Directory | d |
+| Hard link | c |
+| Character and block device files | b |
+| Socket | s |
+| Named pipe | p |
+| Symbolic link | l |
 
 
-## 5- Error prevention
-![An example of error confirmation:](./images/github_danger_zone.png "")
-![An example of error confirmation:](./images/delete_repo_confirm_github.png "")
+### File Access Attributes
+- Every file has a set of nine bits called permission bits to control who can read, write, or execute the content of the file.
+- The permissions are distributed into three user catergories: user owner (_u_), users in the same group (_g_), and all other users (_o_).
+- Permission bits are represented in binary, octal, or character symbols.
+- Each permission may be 'on' or 'off' for each of the three categories of users: owner, group, and other.
 
 
-## 6- Recognition rather than recall
-![An example of recognition rather than recall: ](./images/expedia.png "")
+### File Access Attributes (Cont.)
+![](./images/file-permission-bits.png)
 
 
-## 7- Flexibility and efficiency of use
-![An example of flexibility and efficiency of use: ](./images/zappos.png "")
+### Inspecting files using ls
+```bash
+$ ls -l my-script.sh
+-rwxr-xr--  1 khalid  staff  0 Sep 22 17:49 my-script.sh
+```
+- There are read (_r_), write (_w_), and execute (_x_) permissions. 
+- The symbol _-_ indicates the permission is turned off.
+![](./images/ls-file-ownership-permissions.png)
 
 
-## 8- Aesthetic and minimalist design
-![An example of a minimalist design: ](./images/fabulous.png "")
+###### Numerical Representation
+| Numerical | letter | Meaning |
+|--|----|-------------------------|
+| 7| rwx| read, write, and execute|
+| 6| rw-| read and write|
+| 5| r-x| read and execute|
+| 4| r--| read-only|
+| 3| -wx| write and execute|
+| 2| -w-| write only|
+| 1| --x| execute only|
+| 0| ---| none
 
 
-## 9- Help users recognize, diagnose, and recover from errors
-  - Error messages should be clear, precise, and easy to understand
-![An example of a precise and useful error message](./images/npmjs_error.png "npmjs_error.png")
+### Changing permissions using chmod
+
+```bash
+# Everybody has full access:
+$ chmod 777 main.java
+# Owner has full access:
+$ chmod 700 main.java
+# Owner has full access, group members have read-only access:
+$ chmod 740 main.java
+```
+
+```bash
+# All users have read and write access:
+$ chmod a=rw main.java
+# User has read and write access:
+$ chmod u=rwx main.java
+# Group members have read access:
+$ chmod g=r main.java
+```
+
+```bash
+# Add the execute (x) permission to the user:
+$ chmod u+x main.java
+# Deny the execute (x) permission from the user:
+$ chmod u-x main.java
+```
 
 
-## 10- Help and documentation
-  - Or better yet, work on your design when you find out that users search the documentation to perform a task
+### Changing file owner and group using chown
 
+```bash
+# changing the owner of a file
+$ sudo chown ali main.java 
+# changing the owner of a directory
+$ sudo chown ali ./src/
+# changing the owner of a directory and its subdirectories
+$ sudo chown -R ali ./src/
+```
 
-## International Standards for HCI and Usability
-- Example: International Standards Organization (ISO 9241) <!-- .element: class="fragment" data-fragment-index="0" -->
-
-
-## Accessibility Guidelines
-- Web Content Accessibility Guidelines (WCAG) by W3C <!-- .element: class="fragment" data-fragment-index="0" -->
-- Accessibility guidelines for Mobile <!-- .element: class="fragment" data-fragment-index="1" -->
-
-
-## Any thoughts on the usability of the standards themselves?
-- Why aren't they widely adopted? <!-- .element: class="fragment" data-fragment-index="0" -->
-- What can we do to increase the usability of UI standards?<!-- .element: class="fragment" data-fragment-index="1" -->
+```bash
+# changing the owner and group of a file
+$ sudo chown root:staff main.java
+# changing the owner and group of a directory
+$ sudo chown root:staff ./src
+# changing the owner and group of a directory 
+#          and its subdirectories
+$ sudo chown -R root:staff ./src/
+```
