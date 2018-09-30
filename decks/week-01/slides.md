@@ -93,6 +93,36 @@
   - They innovate rapidly
 
 
-## Installation and Overview
+### Installation, demo, and Overview
 
-### Demo
+
+### Logging in and out
+- Linux has two basic modes:
+  - Graphical mode: nicer but consumes system resources
+    - Examples: Gnome and KDE desktops
+  - Text mode: the usual black text console screen
+
+
+### Logging in and out
+ - login: you enter your username and password
+ - logout: use the _logout_ or _exit_ command
+
+
+### Basic commands
+
+| Command	   |      Meaning                                 |
+|----------|:-----------------------------------------------:|
+| ls |  List directory contents |
+| cd directory | change directories  |
+| passwd |  change the password for the current user |
+| file filename	 |  determine file type |
+
+
+| Command	   |      Meaning                                 |
+|----------|:-----------------------------------------------:|
+| cat textfile | throws content of textfile on the screen  |
+| pwd	display  |  present working directory |
+|  exit or logout|   leave this session|
+| man command	 |  read man pages on command |
+| apropos | search the manual page names and descriptions |
+
