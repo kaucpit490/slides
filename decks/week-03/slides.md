@@ -56,7 +56,7 @@ $ ls /home >> users.txt ## stdout to a file (create or append)
 $ find /etc -name network 2> error.log
 ```
 
-- Redirect stdin and stderr into two different files.
+- Redirect stdout and stderr into two different files.
 
 ```bash
 $ find /etc -name network > out.txt 2> error.log
