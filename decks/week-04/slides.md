@@ -413,3 +413,4 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
 - Analogy: a set of concrete steps vs. an escalator
   - We can't build an escalator with the same uptime as stairs
 - Think of complexity vs. availability
+
