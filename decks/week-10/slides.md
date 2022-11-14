@@ -27,7 +27,7 @@ While these terms may vary among cloud providers, we will use the terms used by 
   - AWS, Azure, and GCP call this "subnet".
 
 
-## Cloud Networking Terms (II)
+## Routing and Peering
 - Network Routes/Routing 
   - A set of rules that are used to determine where network traffic from subnets and/or gateways are directed.
 - Network Peering
@@ -46,6 +46,14 @@ While these terms may vary among cloud providers, we will use the terms used by 
 - A Network Address Translation (NAT) service that allows instances in a private subnet to connect to services outside the VPC while external services are not allowed to initiate a connection to services inside a private network. 
 - Enables outbound internet traffic from instances in a private subnet.
 - Useful when instances in a private subnet need to reach the public Internet for software updates but do not want to be publicly accessible.
+
+
+## Web Application Firewall (WAF)
+- A reverse-proxy that forces clients to pass through the WAF before reaching the server.
+- Helps mitigate many common attacks and vulnerabilities.
+- Creates a shield between a web app and the public Internet
+- It can be also used to block requests from a specific country or geolocation
+- Examples: ModSecurity, AWS WAF, Azure WAF, GCP Cloud Armor, and Cloudflare WAF.
 
 
 ## Single-server Design
@@ -91,7 +99,7 @@ While these terms may vary among cloud providers, we will use the terms used by 
   - This makes it less expensive and more flexible.
 
 
-## Load Balancing (V)
+## Load Balancers Availability
 - A load balancer itself can become a SPOF unless you:
   - Have two LBs, one serving traffic and one running as a passive backup.
   - Have two LBs, serving traffic simultaneously.
@@ -135,7 +143,47 @@ A load balancer may function at the 7th, 4th, or 3rd layer the Open Systems Inte
 - Targets can be VM instances, containers, IP addresses, or serverless functions.
 - Support for HTTP header conditions and methods, URL path, query parameters, and source IP addresses.
 - Protocol listeners: HTTP, HTTPS, and gRPC
-- Examples: AWS Application Load Balancer and Azure Application Gateway.
+
+
+## Application Load Balancer (ALB) (Cont.)
+- ALB supports (SSL/TLS) termination at the ALB.
+  - Traffic flows encrypted to the ALB and then flows unencrypted to the backend servers. 
+  - This improves performance and free the servers from costly encryption and decryption overhead.
+- If security compliance requires end to end SSL/TLS encryption, encrypted communication to the servers can be also configured at the ALB.
+
+
+### Application Load Balancers (ALBs) for Linux
+- The most common load balancers for Linux are:
+ - [nginx](https://nginx.org/en/docs/http/load_balancing.html)
+ - [HAProxy](http://www.haproxy.org/)
+
+ [Apache httpd](https://httpd.apache.org/docs/2.4/mod/mod_proxy_balancer.html) also has a load-balancing module although it's not as widely used as nginx and HAProxy.
+
+
+## Fully-managed Application Load Balancers (ALBs)
+- AWS has a suite of load balancers called Elastic Load Balancer, which has an Application Load Balancer (ALB).
+- GCP has a suite of load balancers called Google Cloud Load Balancing that has an HTTP Load Balancers.
+- Azure's ALB is called Application Gateway.
+
+
+## Application Load Balancer Features
+- Secure Sockets Layer (SSL/TLS) termination
+- Autoscaling
+  - scale-up/scale-out or scale-in/scale-down based on changing traffic load patterns.
+-  Multiple availability zone (AZ) redundancy.
+- Static virtual IP address
+- Web Application Firewall
+
+
+## Application Load Balancer Features (Cont.)
+- URL-based routing
+  - requests for _http://example.com/video/*_ are routed to the _VideoServerPool_, and _http://example.com/images/*_ are routed to the _ImageServerPool_.
+
+
+## Application Load Balancer Features (Cont.)
+- Host-based routing
+  - requests for _http://sa.example.com_ are routed to the _SAServerPool_, and _http://us.example.com_ are routed to the _USServerPool_.
+  - requests for _http://example.sa_ are routed to the _SAServerPool_, and _http://example.us_ are routed to the _USServerPool_.
 
 
 ### Network Load Balancer (NLB)
