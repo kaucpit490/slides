@@ -1,6 +1,9 @@
 ## Agenda
 
 - Networking on the cloud
+  - VPCs and Subnets
+  - Routing, Peering, and Network Interfaces
+  - NAT Gateways and WAF
 - Single-server design
 - Load balancing
 - Load balancer types
@@ -87,16 +90,16 @@ While these terms may vary among cloud providers, we will use the terms used by 
 
 ## Hardware Load Balancers
 - A hardware LB uses a proprietary device/appliance and a specialized operating system to distribute traffic across multiple servers.
-  - It can be scaled by purchasing bigger appliances from the vendor.
-  - It is often over-provisioned to handle larger requests.
-  - This makes them more expensive and less flexible.
+  - can be scaled by purchasing bigger appliances from the vendor.
+  - over-provisioned to handle larger requests.
+  - more expensive and less flexible.
 
 
 ## Software Load Balancers
 - A software LB uses Software solutions that run on commodity hardware.
-  - This can be installed on almost any VM or computer architecture.
-  - It is able to scale elastically to meet demand.
-  - This makes it less expensive and more flexible.
+  - can be installed on almost any VM or computer architecture.
+  - scale elastically to meet demand.
+  - less expensive and more flexible.
 
 
 ## Load Balancers Availability
@@ -186,6 +189,32 @@ A load balancer may function at the 7th, 4th, or 3rd layer the Open Systems Inte
   - requests for _http://example.sa_ are routed to the _SAServerPool_, and _http://example.us_ are routed to the _USServerPool_.
 
 
+## Application Load Balancer Features (Cont.)
+- More routing features
+  - redirect HTTP requests to HTTPS
+  - redirect from and to any port
+  - redirect to an external site
+- Sticky sessions
+  - bind a user's session to a specific target
+- Authenticate users
+  - securely authenticate the client sending requests.
+
+
+## Application Load Balancer Features (Cont.)
+- Connection Draining
+  - give all in-progress requests time to complete when a VM is removed from the pool or server updates.
+- Custom error pages
+   - 403 web application firewall error when WAF detects malicious traffic and blocks it
+   - 502 maintenance page when there's no backend server to route to.
+
+
+## Types of Load Balancers (II)
+
+- <span style="color:#666">Layer-7 Load Balancer: Application Load Balancer</span>
+- Layer-4 Load Balancer: Network Load Balancer
+- Layer-3 Load Balancer: Gateway Load Balancer
+
+
 ### Network Load Balancer (NLB)
 - Layer 4 load balancer that distributes incoming traffics across multiple targets based on the source and destination IP addresses and ports available in the packet header, without considering the contents of the packets.
 - Targets can be VM instances, containers, or IP addresses.
@@ -198,8 +227,16 @@ A load balancer may function at the 7th, 4th, or 3rd layer the Open Systems Inte
 - Examples: AWS Network Load Balancer and Azure Load Balancer.
 
 
+## Types of Load Balancers (II)
+
+- <span style="color:#666">Layer-7 Load Balancer: Application Load Balancer</span>
+- <span style="color:#666">Layer-4 Load Balancer: Network Load Balancer</span>
+- Layer-3 Load Balancer: Gateway Load Balancer
+
+
 ### Gateway Load Balancer (GLB)
-- Layer 3 load balancer that is used for managing and scaling virtual appliances such as firewalls and intrusion detection systems.
+- Layer 3 load balancer
+- used for managing and scaling virtual appliances such as firewalls and intrusion detection systems.
 - Protocol listeners: IP
 - Targets can be IP or VM instances.
 - It is deployed in the same VPC as that of the virtual appliances.
@@ -208,8 +245,14 @@ A load balancer may function at the 7th, 4th, or 3rd layer the Open Systems Inte
 ### Gateway Load Balancer (GLB) (Cont.)
 - It listens for all IP packets across all ports and forwards traffic to the target group that's specified in the listener rule.
 - It provides private connectivity between virtual appliances in the service provider VPC, and application servers in the service consumer VPC.
+- Examples: AWS is the only provider that has a layer-3 LB called Gateway Load Balancer.
 
-- Examples: AWS Gateway Load Balancer,
+
+### Summary of Load Balancer Types
+- **Layer-3 LB** takes routing decisions based on <u>IP addresses</u> alone (source & destination).
+- **Layer-4 LB** takes routing decisions based on <u>IP addresses</u> and <u>TCP or UDP ports</u>.
+- **Layer-7 LB** takes routing decisions based on <u>IP addresses</u> and <u>TCP or UDP ports</u>, and the <u>content of the request</u> (URL, HTTP headers or cookies).
+
 
 
 ## Application Load Balancer Demo
