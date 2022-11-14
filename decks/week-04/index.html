@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>CPIT-490/632 Week 03: Introduction to cloud computing services and architecture</title>
+
+	<link rel="stylesheet" href="../../css/reveal.css">
+	<link rel="stylesheet" href="../../css/theme/black.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="../../lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+	<style>
+		.reveal ol,
+		.reveal dl,
+		.reveal ul {
+			display: block;
+			text-align: left;
+			margin: 0 0 0 1em;
+		}
+		.reveal h1, .reveal h2, .reveal h3,
+		.reveal h4, .reveal h5, .reveal h6 {
+			text-transform: none;
+		}
+		table thead th{
+			background-color: #4d4d4d;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>CPIT 490/632 </h1>
+				<hr />
+				<h4 style="text-transform: none;">Week 03: Introduction to cloud computing services and architecture</h4>
+				<div style="background-color:#0000; display: inline-block; ">
+					<img style="margin-bottom: 0px; padding-bottom: 0px" src="../../images/KAU_logo.jpg"
+						alt="King Abdulaziz University Logo" />
+					<div style="margin: 0px; padding: 0px">
+						<p style="font-size: 40%; margin: 0px; padding: 0px">King Abdulaziz University</p>
+						<p style="font-size: 40%; margin: 0px; padding: 0px">Khalid Alharbi</p>
+						<p style="font-size: 40%; margin: 0px; padding: 0px"><small>Last updated: Fall 2022</small></p>
+					</div>
+				</div>
+			</section>
+			<section data-markdown="slides.md" data-separator="^\n\n" data-separator-vertical="^\n\n"
+				data-separator-notes="^Note:" data-charset="iso-8859-15">
+			</section>
+		</div>
+	</div>
+
+	<script src="../../lib/js/head.min.js"></script>
+	<script src="../../js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			dependencies: [
+				{ src: '../../plugin/markdown/marked.js' },
+				{ src: '../../plugin/markdown/markdown.js' },
+				{ src: '../../plugin/notes/notes.js', async: true },
+				{ src: '../../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			],
+			history: true
+		});
+	</script>
+</body>
+
+</html>
