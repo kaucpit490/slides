@@ -270,11 +270,13 @@ A load balancer may function at the 7th, 4th, or 3rd layer the Open Systems Inte
 
 
 ## Steps
-1. Create a layer-7 load balancer. 
-2. Create three backend pools.
-3. Add target VMs into the backend pools.
-4. Create a backend listener.
-5. Configure the load balancer to use path-based routing rules to send incoming requests to the appropriate servers in the backend pools.
+1. Create a VNet with four subnets.
+2. Create a layer-7 load balancer inside a subnet. 
+3. Create three backend pools.
+4. Launch VMs in the remaining 3 subnets.
+5. Add target VMs to backend pools.
+6. Create a backend listener.
+7. Configure the load balancer to use path-based routing rules to send incoming requests to the appropriate servers in the backend pools.
 
 
 ## Demo
