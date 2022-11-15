@@ -258,7 +258,7 @@ A load balancer may function at the 7th, 4th, or 3rd layer the Open Systems Inte
 ## Application Load Balancer Example
 
 
-- We will use a fictional [bakery API server]() that has the following endpoints:
+- We will use a fictional [bakery API server](https://gitlab.com/cpit490/web-server) that has the following endpoints:
 
   - `/us/menu`: returns the US menu of the bakery store.
   - `/sa/menu`: returns the SA menu of the bakery store.
