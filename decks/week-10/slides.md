@@ -255,4 +255,26 @@ A load balancer may function at the 7th, 4th, or 3rd layer the Open Systems Inte
 
 
 
-## Application Load Balancer Demo
+## Application Load Balancer Example
+
+
+- We will use a fictional [bakery API server]() that has the following endpoints:
+
+  - `/us/menu`: returns the US menu of the bakery store.
+  - `/sa/menu`: returns the SA menu of the bakery store.
+  - `/health/`: A heartbeat endpoint for API health check. This is useful for the LB to check if the web server is running or not.
+  - `/fatal`: for terminating the web server. This is useful for testing auto-scaling.
+
+
+![](./images/ALB-demo-example-wh.png)
+
+
+## Steps
+1. Create a layer-7 load balancer. 
+2. Create three backend pools.
+3. Add target VMs into the backend pools.
+4. Create a backend listener.
+5. Configure the load balancer to use path-based routing rules to send incoming requests to the appropriate servers in the backend pools.
+
+
+## Demo
