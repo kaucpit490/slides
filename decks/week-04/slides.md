@@ -119,7 +119,7 @@ Examples: research labs, health care companies, financial companies, etc.
 - Examples: Heroku, Google App Engine, AWS elastic beanstalk, and Azure App Service.
 
 
-## Infrastructure as a Service (SaaS)
+## Infrastructure as a Service (IaaS)
 - Low level cloud computing solution that offers provisioning compute, storage, and networking resources on a pay-as-you-go basis
 - Offers the flexibility to scale the required resources up and down to meet demands.
 - Install, configure, and manage your own infrastructure including compute, storage, networking, operating systems, middleware, and applications.
